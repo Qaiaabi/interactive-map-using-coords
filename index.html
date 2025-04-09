@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Map - Yogyakarta Landmarks</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #map {
+      height: 80vh;
+      width: 90%;
+      margin: 20px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .leaflet-popup-content-wrapper {
+      background-color: #1f1f1f;
+      color: #fff;
+      border-radius: 10px;
+    }
+
+    .leaflet-popup-tip {
+      background-color: #1f1f1f;
+    }
+  </style>
+</head>
+<body>
+  <h2>🗺️ Explore Landmarks Around Yogyakarta</h2>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Inisialisasi peta
+    var map = L.map('map').setView([-7.797068, 110.370529], 13); // Titik tengah Yogyakarta
+
+    // Tambahkan layer peta dari OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Tambahkan marker + popup
+    const landmarks = [
+      {
+        name: "Tugu Yogyakarta",
+        coords: [-7.782889, 110.367097],
+        desc: "Ikon kota Yogyakarta yang legendaris dan penuh sejarah."
+      },
+      {
+        name: "Malioboro Street",
+        coords: [-7.792778, 110.365000],
+        desc: "Jalan terkenal untuk belanja, kuliner, dan budaya lokal."
+      },
+      {
+        name: "Keraton Yogyakarta",
+        coords: [-7.805917, 110.364944],
+        desc: "Istana resmi Kesultanan Ngayogyakarta Hadiningrat."
+      },
+      {
+        name: "Alun-Alun Kidul",
+        coords: [-7.813056, 110.363333],
+        desc: "Alun-alun tempat bermain dan wisata malam yang seru."
+      },
+      {
+        name: "Taman Sari",
+        coords: [-7.808306, 110.359091],
+        desc: "Kompleks pemandian kerajaan yang penuh sejarah dan arsitektur indah."
+      }
+    ];
+
+    landmarks.forEach(place => {
+      L.marker(place.coords)
+        .addTo(map)
+        .bindPopup(`<strong>${place.name}</strong><br>${place.desc}`);
+    });
+  </script>
+</body>
+</html>
